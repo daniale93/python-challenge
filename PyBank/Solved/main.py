@@ -49,3 +49,27 @@ print(f"Total: ${total}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase In Profits: {months[max_inc_month]} (${max_inc}) ")
 print(f"Greatest Decrease In Profits:{months[max_dec_month]} (${max_dec})")
+
+
+# write CSV
+
+# Specify the file to write to
+output_path = os.path.join("..", "Analysis", "PyBank Results.csv")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile, delimiter=',')
+
+    # Write the first row (column headers)
+    csvwriter.writerow(['Financial Analysis'])
+    csvwriter.writerow(['-------------------------------'])
+    csvwriter.writerow([f'Total Months: {month_count} '])
+    csvwriter.writerow([f'Total: ${total}'])
+    csvwriter.writerow([f"Average Change: ${avg_change}"])
+    csvwriter.writerow([f"Greatest Increase In Profits: {months[max_inc_month]} (${max_inc}) "])
+    csvwriter.writerow([f"Greatest Decrease In Profits: {months[max_dec_month]} (${max_dec})"])
+
+
+   
