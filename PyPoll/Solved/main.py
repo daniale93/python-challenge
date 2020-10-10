@@ -50,10 +50,13 @@ otooley_pc = round((otooley_votes / total_votes) * 100, 3)
 
 #   * The winner of the election based on popular vote.
 
-candidates = ["Khan", "Correy", "Li","O'Tooley"]
-votes = [khan_votes, correy_votes, li_votes, otooley_votes]
+# candidates = ["Khan", "Correy", "Li","O'Tooley"]
+# votes = [khan_votes, correy_votes, li_votes, otooley_votes]
+
+votes_dict = {"Khan": khan_votes, "Correy": correy_votes, "Li": li_votes, "O'Tooley": otooley_votes}
 
 
+winner = max(votes_dict, key=votes_dict.get)
 
 print("Election Results")
 print("------------------------------")
@@ -66,3 +69,29 @@ print(f"O'Tooley: {otooley_pc}% ({otooley_votes})")
 print("------------------------------")
 print(f"Winner: {winner}")
 print("------------------------------")
+
+
+# write CSV
+
+# Specify the file to write to
+output_path = os.path.join("..", "Analysis", "PyPoll Results.csv")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile, delimiter=',')
+
+    # Write the first row (column headers)
+    csvwriter.writerow(['Election Results'])
+    csvwriter.writerow(['-------------------------------'])
+    csvwriter.writerow([f'Total Votes: {total_votes} '])
+    csvwriter.writerow(['-------------------------------'])
+    csvwriter.writerow([f'Khan: {khan_pc}% ({khan_votes})'])
+    csvwriter.writerow([f'Correy: {correy_pc}% ({correy_votes})'])
+    csvwriter.writerow([f'Li: {li_pc}% ({li_votes})']) 
+    csvwriter.writerow([f"O'Tooley: {otooley_pc}% ({otooley_votes})"]) 
+    csvwriter.writerow(['-------------------------------'])
+    csvwriter.writerow([f'Winner: {winner}']) 
+    csvwriter.writerow(['-------------------------------'])
+   
